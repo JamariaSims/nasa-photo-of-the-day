@@ -17,18 +17,18 @@ const dummyData = {
 };
 
 function App() {
-	const [data, setData] = useState(null);
+	const [data, setData] = useState(dummyData);
 
 	useEffect(() => {
-		// axios
-		// 	.get('https://api.nasa.gov/planetary/apod?api_key=Q0bfBWYq1i0yPcQMvUETWK9eJcyJX3cx28VJIhA1&date=2012-03-14')
-		// 	.then((response) => {
-		// 		setData(response);
-		// 		console.log(response);
-		// 	})
-		// 	.catch(() => {});
-		setData(dummyData);
-		console.log(data);
+		axios
+			.get(
+				"https://api.nasa.gov/planetary/apod?api_key=Q0bfBWYq1i0yPcQMvUETWK9eJcyJX3cx28VJIhA1&date=2012-03-14"
+			)
+			.then((response) => {
+				setData(response.data);
+				console.log(response);
+			})
+			.catch(() => {});
 	}, []);
 	console.log(data);
 	return (
