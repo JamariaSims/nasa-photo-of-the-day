@@ -1,4 +1,5 @@
 import React from "react";
+import { Player } from "video-react";
 import {
 	Card,
 	CardText,
@@ -9,7 +10,8 @@ import {
 } from "reactstrap";
 
 export default function Info(props) {
-	const { data } = props;
+	const { data, setSite, site } = props;
+
 	return (
 		<div>
 			<h1 className="heading">NASA</h1>
@@ -22,8 +24,16 @@ export default function Info(props) {
 					</CardSubtitle>
 				</CardBody>
 				<div>
-					{" "}
-					<img width="100%" width="500px" src={data.url} alt="Card image cap" />
+					{data.media_type === "video" ? (
+						<Player playsInline autoplay type="video" src={data.url} />
+					) : (
+						<img
+							width="100%"
+							width="500px"
+							src={data.url}
+							alt="Card image cap"
+						/>
+					)}
 				</div>
 				<CardBody>
 					<CardText>{data.explanation}</CardText>

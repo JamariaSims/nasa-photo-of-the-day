@@ -12,7 +12,9 @@
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-scripts": "3.4.1",
-    "reactstrap": "^8.9.0"
+    "reactstrap": "^8.9.0",
+    "redux": "^4.1.0",
+    "video-react": "^0.14.1"
   },
   "scripts": {
     "start": "react-scripts start",

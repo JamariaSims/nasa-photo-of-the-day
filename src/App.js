@@ -3,7 +3,10 @@ import axios from "axios";
 import "./App.css";
 import Info from "./components/Info";
 import { Spinner } from "reactstrap";
+import "../node_modules/video-react/dist/video-react.css";
 
+const defaultSite =
+	"https://api.nasa.gov/planetary/apod?api_key=Q0bfBWYq1i0yPcQMvUETWK9eJcyJX3cx28VJIhA1&date=2012-04-24";
 const dummyData = {
 	copyright: "Alan FriedmanAverted Imagination",
 	date: "2012-03-14",
@@ -18,22 +21,33 @@ const dummyData = {
 
 function App() {
 	const [data, setData] = useState(dummyData);
+	const [site, setSite] = useState("");
 
 	useEffect(() => {
-		axios
-			.get(
-				"https://api.nasa.gov/planetary/apod?api_key=Q0bfBWYq1i0yPcQMvUETWK9eJcyJX3cx28VJIhA1&date=2012-03-14"
-			)
-			.then((response) => {
-				setData(response.data);
-				console.log(response);
-			})
-			.catch(() => {});
+		{
+			axios
+				.get(defaultSite, {
+					headers: {
+						"Access-Control-Allow-Headers": "Content-Type",
+						"Access-Control-Allow-Origin": defaultSite,
+						"Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+						"Content-Type": "text/json",
+					},
+				})
+				.then((response) => {
+					setData(response.data);
+				})
+				.catch(() => {});
+		}
 	}, []);
 	console.log(data);
 	return (
 		<div className="App">
-			{data ? <Info data={data} /> : <Spinner color="dark" />}
+			{data ? (
+				<Info data={data} setSite={setSite} site={site} />
+			) : (
+				<Spinner color="dark" />
+			)}
 		</div>
 	);
 }
