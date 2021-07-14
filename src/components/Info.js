@@ -1,5 +1,5 @@
 import React from "react";
-import { Player } from "video-react";
+import ReactPlayer from "react-player";
 import {
 	Card,
 	CardText,
@@ -11,6 +11,9 @@ import {
 
 export default function Info(props) {
 	const { data, setSite, site } = props;
+	console.log(props);
+	console.log(data.media_type);
+	console.log(data.url);
 
 	return (
 		<div>
@@ -25,14 +28,9 @@ export default function Info(props) {
 				</CardBody>
 				<div>
 					{data.media_type === "video" ? (
-						<Player playsInline autoplay type="video" src={data.url} />
+						<ReactPlayer url={data.url} />
 					) : (
-						<img
-							width="100%"
-							width="500px"
-							src={data.url}
-							alt="Card image cap"
-						/>
+						<img width="100%" width="500px" src={data.url} />
 					)}
 				</div>
 				<CardBody>

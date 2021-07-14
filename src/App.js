@@ -6,7 +6,7 @@ import { Spinner } from "reactstrap";
 import "../node_modules/video-react/dist/video-react.css";
 
 const defaultSite =
-	"https://api.nasa.gov/planetary/apod?api_key=Q0bfBWYq1i0yPcQMvUETWK9eJcyJX3cx28VJIhA1&date=2012-04-24";
+	"https://api.nasa.gov/planetary/apod?api_key=Q0bfBWYq1i0yPcQMvUETWK9eJcyJX3cx28VJIhA1";
 const dummyData = {
 	copyright: "Alan FriedmanAverted Imagination",
 	date: "2012-03-14",
@@ -20,20 +20,13 @@ const dummyData = {
 };
 
 function App() {
-	const [data, setData] = useState(dummyData);
+	const [data, setData] = useState(null);
 	const [site, setSite] = useState("");
 
 	useEffect(() => {
 		{
 			axios
-				.get(defaultSite, {
-					headers: {
-						"Access-Control-Allow-Headers": "Content-Type",
-						"Access-Control-Allow-Origin": defaultSite,
-						"Access-Control-Allow-Methods": "OPTIONS,POST,GET",
-						"Content-Type": "text/json",
-					},
-				})
+				.get(defaultSite)
 				.then((response) => {
 					setData(response.data);
 				})
